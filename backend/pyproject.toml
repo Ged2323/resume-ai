@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "resume-ai-backend"
+version = "0.1.0"
+description = "Resume AI backend powered by NVIDIA NIM"
+authors = []
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.115.0"
+uvicorn = {extras = ["standard"], version = "^0.32.0"}
+openai = "^1.54.0"
+python-dotenv = "^1.0.0"
+pydantic = "^2.9.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
