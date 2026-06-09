@@ -60,7 +60,8 @@ export default function App() {
         <div className="spinner">
           <div className="spinner-ring" />
           <div className="spinner-text">Generating your materials...</div>
-          <div className="spinner-sub">First request may take 20–30 sec while the server wakes up</div>
+          <div className="spinner-sub">First request may take 20–30 sec while the server wakes up.</div>
+          <div className="spinner-sub">If it times out, free API credits may be exhausted — try again later.</div>
         </div>
       )}
       {results && <ResultsPanel coverLetter={results.cover_letter} gapAnalysis={results.gap_analysis} />}
