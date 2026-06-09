@@ -56,7 +56,13 @@ export default function App() {
       />
 
       {error && <p className="error">{error}</p>}
-      {loading && <div className="spinner">Generating your materials</div>}
+      {loading && (
+        <div className="spinner">
+          <div className="spinner-ring" />
+          <div className="spinner-text">Generating your materials...</div>
+          <div className="spinner-sub">First request may take 20–30 sec while the server wakes up</div>
+        </div>
+      )}
       {results && <ResultsPanel coverLetter={results.cover_letter} gapAnalysis={results.gap_analysis} />}
     </div>
   )
