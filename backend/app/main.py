@@ -1,6 +1,10 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routers import generate
+from app.routers import generate, feedback
+from app.db import engine
+from app.models import Base
+
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Resume AI")
 
@@ -12,3 +16,4 @@ app.add_middleware(
 )
 
 app.include_router(generate.router, prefix="/api")
+app.include_router(feedback.router, prefix="/api")

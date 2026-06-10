@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import InputForm from './components/InputForm'
 import ResultsPanel from './components/ResultsPanel'
+import FeedbackWidget from './components/FeedbackWidget'
 
 interface Results {
   cover_letter: string
@@ -64,7 +65,12 @@ export default function App() {
           <div className="spinner-sub">If it times out, free API credits may be exhausted — try again later.</div>
         </div>
       )}
-      {results && <ResultsPanel coverLetter={results.cover_letter} gapAnalysis={results.gap_analysis} />}
+      {results && (
+        <>
+          <ResultsPanel coverLetter={results.cover_letter} gapAnalysis={results.gap_analysis} />
+          <FeedbackWidget />
+        </>
+      )}
     </div>
   )
 }
