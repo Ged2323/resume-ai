@@ -212,3 +212,69 @@ button:disabled {
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
+
+.feedback-widget {
+  margin-top: 2rem;
+  text-align: center;
+  padding: 1.5rem;
+  background: #1a1a1a;
+  border: 1px solid #2e2e2e;
+  border-radius: 8px;
+}
+
+.feedback-label {
+  color: #888;
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+}
+
+.feedback-thumbs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.thumb-btn {
+  background: #111;
+  border: 1px solid #333;
+  border-radius: 6px;
+  padding: 0.4rem 0.9rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #888;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.thumb-btn:hover {
+  border-color: #76b900;
+  background: #1f2a00;
+}
+
+.thumb-btn.active {
+  border-color: #76b900;
+  background: #1f2a00;
+}
+
+.feedback-text {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  margin-bottom: 0.75rem;
+}
+
+.feedback-submit {
+  padding: 0.5rem 1.5rem;
+  font-size: 0.9rem;
+}
+
+.feedback-thanks {
+  color: #76b900;
+  font-size: 0.95rem;
+}
+
+.feedback-error {
+  color: #ff6b6b;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+}
