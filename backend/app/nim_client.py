@@ -9,8 +9,7 @@ client = AsyncOpenAI(
     api_key=os.environ["NVIDIA_API_KEY"],
 )
 
-# Verify this ID in NIM catalog: https://build.nvidia.com/deepseek-ai/deepseek-v4-flash
-MODEL = "deepseek-ai/deepseek-v4-flash"
+MODEL = "deepseek-ai/deepseek-v4-flash-0731"
 
 SYSTEM_PROMPT = """You are an expert career coach and professional writer.
 
