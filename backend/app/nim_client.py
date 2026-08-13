@@ -9,7 +9,7 @@ client = AsyncOpenAI(
     api_key=os.environ["NVIDIA_API_KEY"],
 )
 
-MODEL = "deepseek-ai/deepseek-v4-flash-0731"
+MODEL = "meta/llama-3.1-8b-instruct"
 
 SYSTEM_PROMPT = """You are an expert career coach and professional writer.
 
