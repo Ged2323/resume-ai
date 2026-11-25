@@ -2,7 +2,7 @@
 
 Paste a job description and your resume — get a tailored cover letter and a skill gap analysis in seconds.
 
-Powered by **NVIDIA NIM** + **Llama 3.1 8B** (free endpoint).
+Powered by **NVIDIA NIM** + **Nemotron 3.5** (free endpoint).
 
 ## Stack
 
@@ -10,7 +10,7 @@ Powered by **NVIDIA NIM** + **Llama 3.1 8B** (free endpoint).
 |-------|------|
 | Frontend | React 18 + TypeScript + Vite |
 | Backend | FastAPI + Python 3.11 |
-| AI | NVIDIA NIM — Llama 3.1 8B Instruct |
+| AI | NVIDIA NIM — Nemotron 3.5 Bolt |
 
 ## Setup
 

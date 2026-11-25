@@ -1,5 +1,7 @@
+import logging
 from datetime import datetime, timezone
 from fastapi import APIRouter, HTTPException, Depends
+from openai import OpenAIError
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from sqlalchemy.dialects.postgresql import insert as pg_insert
@@ -10,6 +12,7 @@ from app.db import get_db
 from app.models import UsageRecord, Subscription
 
 router = APIRouter()
+logger = logging.getLogger(__name__)
 
 FREE_LIMIT = 3  # generates per month for unauthenticated / non-paying users
 
@@ -74,7 +77,12 @@ async def generate(
                 detail=f"Free limit of {FREE_LIMIT} uses/month reached. Upgrade to continue.",
             )
 
-    result = await generate_application_materials(request.job_description, request.resume)
+    try:
+        result = await generate_application_materials(request.job_description, request.resume)
+    except OpenAIError:
+        # A bare 500 skips CORS headers, so the browser only shows "Failed to fetch"
+        logger.exception("NVIDIA NIM request failed")
+        raise HTTPException(status_code=502, detail="AI service unavailable. Please try again later.")
     uses_after = _increment_usage(db, user_id)
 
     return ApplicationResponse(

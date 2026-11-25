@@ -9,7 +9,7 @@ client = AsyncOpenAI(
     api_key=os.environ["NVIDIA_API_KEY"],
 )
 
-MODEL = "meta/llama-3.1-8b-instruct"
+MODEL = "nvidia/nemotron-3.5-bolt-e4b"
 
 SYSTEM_PROMPT = """You are an expert career coach and professional writer.
 

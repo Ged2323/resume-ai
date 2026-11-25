@@ -90,7 +90,7 @@ export default function App() {
       <header>
         <h1>Resume AI</h1>
         <p>Paste a job description and your resume — get a tailored cover letter and gap analysis.</p>
-        <span className="badge">Powered by NVIDIA NIM · Llama 3.1 8B</span>
+        <span className="badge">Powered by NVIDIA NIM · Nemotron 3.5</span>
         <div className="auth-bar">
           {session ? (
             <>
