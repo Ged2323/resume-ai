@@ -1,6 +1,7 @@
+import hashlib
 import logging
 from datetime import datetime, timezone
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, HTTPException, Depends, Request
 from openai import OpenAIError
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
@@ -56,17 +57,26 @@ def _is_subscribed(db: Session, user_id: str) -> bool:
     return sub is not None and sub.status == "active"
 
 
+def _anon_id(http_request: Request) -> str:
+    # Render sits behind Cloudflare, which sets CF-Connecting-IP; client.host is only the proxy there.
+    ip = http_request.headers.get("cf-connecting-ip") or http_request.client.host
+    # Hashed so raw addresses are not stored. 35 chars, column holds 64.
+    # ponytail: exact-IP match, so shared networks share a quota and IPv6 users can rotate;
+    # group IPv6 by /64 or require sign-in if abused.
+    return "ip:" + hashlib.sha256(ip.encode()).hexdigest()[:32]
+
+
 @router.post("/generate", response_model=ApplicationResponse)
 async def generate(
     request: ApplicationRequest,
+    http_request: Request,
     user: dict | None = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
     if not request.job_description.strip() or not request.resume.strip():
         raise HTTPException(status_code=400, detail="Both fields required.")
 
-    # Anonymous users tracked by a fixed sentinel — no per-IP tracking for simplicity
-    user_id = user["id"] if user else "anonymous"
+    user_id = user["id"] if user else _anon_id(http_request)
     subscribed = _is_subscribed(db, user_id) if user else False
 
     if not subscribed:
